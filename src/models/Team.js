@@ -1,9 +1,16 @@
-const { DataTypes } = require("sequelize");
-const sequelize = require("../config/database");
+
+import { DataTypes } from "sequelize";
+import sequelize from "../config/database.js";
 
 const Team = sequelize.define("Team", {
-  name: { type: DataTypes.STRING, allowNull: false },
-  city: { type: DataTypes.STRING, allowNull: false },
+  name: { 
+    type: DataTypes.STRING, 
+    allowNull: false 
+  },
+  city: { 
+    type: DataTypes.STRING, 
+    allowNull: false 
+  },
 });
 
-module.exports = Team;
+export default Team;
