@@ -1,10 +1,10 @@
+import dotenv from "dotenv";
 dotenv.config();
 import sequelize from "./src/models/register.js";
 import User from "./src/models/User.js";
 import bcrypt from "bcrypt";
 import express from "express";
 import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
 import { authMiddleware } from "./src/middlewares/authMiddleware.js";
 import { roleMiddleware } from "./src/middlewares/roleMiddleware.js";
 
@@ -61,12 +61,7 @@ app.post("/login", async (req, res) => {
     const compare = await bcrypt.compare(password, user.password);
 
     if (!compare) return res.status(400).json({ error: "Invalid password" });
-
-    const token = jwt.sign(
-      { id: user.id, email: user.email, role: user.role },
-      process.env.JWT_SECRET,
-      { expiresIn: "1h" }
-    );
+    jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "1h" });
 
     res.json({ message: "Login successful", token });
   } catch (err) {
@@ -75,21 +70,7 @@ app.post("/login", async (req, res) => {
 });
 
 app.get("/profile", authMiddleware, (req, res) => {
-  const authHeader = req.headers["authorization"];
-  const token = authHeader && authHeader.split(" ")[1];
-
-  if (!token) return res.status(401).json({ error: "Token missing" });
-
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-    const user = User.findByPk(decoded.id, {
-      attributes: { exclude: ["password"] },
-    });
-    res.json({ user: req.user });
-  } catch (error) {
-    res.status(403).json({ error: "Invalid token" });
-  }
+  res.json({ user: req.user });
 });
 
 app.get("/admin", authMiddleware, roleMiddleware("admin"), (req, res) => {
