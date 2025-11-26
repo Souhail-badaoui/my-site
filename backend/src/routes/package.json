@@ -2,19 +2,11 @@
   "name": "can_2025",
   "version": "1.0.0",
   "description": "",
-<<<<<<< HEAD
   "main": "index.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node --watch index.js"
-=======
-  "type": "module",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node --watch app.js"
->>>>>>> b624bda529d6130be7d021975a3f330a2a631a39
   },
   "keywords": [],
   "author": "",
