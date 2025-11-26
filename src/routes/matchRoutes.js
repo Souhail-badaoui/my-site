@@ -1,10 +1,17 @@
-const router = require("express").Router();
-const matchCtrl = require("../controllers/matchController");
+// src/routes/matchRoutes.js
+import express from 'express';
+import { authenticate, authorizeAdmin } from '../middlewares/authMiddleware.js'; 
+import { createMatch, getMatches, getMatch, updateMatch, deleteMatch } from '../controllers/matchController.js'; 
 
-router.post("/", matchCtrl.createMatch);
-router.get("/", matchCtrl.getMatches);
-router.get("/:id", matchCtrl.getMatch);
-router.put("/:id", matchCtrl.updateMatch);
-router.delete("/:id", matchCtrl.deleteMatch);
+const router = express.Router();
 
-module.exports = router;
+// Public Routes (No token needed)
+router.get('/', getMatches);
+router.get('/:id', getMatch);
+
+// Protected Routes (Requires Admin token)
+router.post('/', authenticate, authorizeAdmin, createMatch);
+router.put('/:id', authenticate, authorizeAdmin, updateMatch);
+router.delete('/:id', authenticate, authorizeAdmin, deleteMatch);
+
+export default router; // <-- Exports the Express router instance

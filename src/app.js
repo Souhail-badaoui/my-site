@@ -1,26 +1,36 @@
+// src/app.js (Essential Imports)
+
 import express from "express";
+import "dotenv/config"; 
+import cors from 'cors';
+
+// 1. Database connection instance
+import { sequelize } from "./config/database.js";
+
+// 2. 🚨 CRITICAL FIX: Import ALL models to register them with Sequelize
+import Match from "./models/Match.js";
+import Team from "./models/Team.js";
+import Player from "./models/player.js";
+import User from "./models/user.js"; // Assuming you have a User model for Auth
+
+// --- ROUTES (Imported after models) ---
+import authRoutes from './routes/authRoutes.js'; 
+import teamRoutes from './routes/teamRoutes.js'; 
+import playerRoutes from './routes/playerRoutes.js';
+import matchRoutes from './routes/matchRoutes.js'; 
+
 const app = express();
-import "dotenv/config"
-import {sequelize} from "./config/database.js"
-// body parser
-app.use(express.json());
+// ... middleware ...
 
-// ROUTES
+// 3. sequelize.sync() now knows about the models
+sequelize.sync({ alter: true })
+    .then(() => console.log('Database synchronized.'))
+    .catch(err => console.error('Database synchronization error:', err));
 
-/*
-const teamRoutes = require("./routes/teamRoutes");
-const playerRoutes = require("./routes/playerRoutes");
-const matchRoutes = require("./routes/matchRoutes");
-app.use("/teams", teamRoutes);
-app.use("/players", playerRoutes);
-app.use("/matches", matchRoutes);
-*/
+// ... route integration and server start ...
+const PORT = process.env.PORT || 3000;
 
-
-sequelize.sync({ alter: true });
-
-const PORT = 3000;
-
+// CRITICAL: Launch the server and start listening for connections
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });
