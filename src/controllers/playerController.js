@@ -1,7 +1,6 @@
-const Player = require("../models/Player");
-const Team = require("../models/Team");
-
-module.exports = {
+import {Player} from '../models/Player.js'
+import { Team  } from '../models/Team.js';
+export const playerController = {
 
   async getAllPlayers(req, res) {
     try {

@@ -1,8 +1,8 @@
 import "dotenv/config";
 import express from "express";
 import { sequelize } from "./config/database.js";
-import "./models/Team.js"; 
-import "./models/Player.js";
+import  teamRoutes from "./routes/teamRoutes.js";
+import playerRoutes from "./routes/playerRoutes.js"
 
 const app = express();
 app.use(express.json());
@@ -17,6 +17,9 @@ sequelize.sync({ alter: true })
   .catch((err) => {
     console.log("Error creating tables:", err);
   });
+
+app.use("/teams" , teamRoutes)
+app.use("/player" , playerRoutes)
 
 app.get("/", (req , res) => {
   res.send("CAN API running...");
