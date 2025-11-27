@@ -1,4 +1,4 @@
-import {Team} from "../models/Team.js"
+import Team from "../models/Team.js"
 
 export const teamController = {
 

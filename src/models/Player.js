@@ -1,29 +1,25 @@
-import { DataTypes } from "sequelize";
-import { sequelize } from "../config/database.js";
-import { Team } from "./Team.js";
 
-export const Player = sequelize.define("Player", {
-  name: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  position: {
-    type: DataTypes.STRING, 
-    allowNull: false,
-  },
-  number: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-  age: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-  },
-}, {
-  tableName: "players",
-  timestamps: true,
-});
 
-Team.hasMany(Player, { foreignKey: "teamId" });
-Player.belongsTo(Team, { foreignKey: "teamId" });
+export default (sequelize, DataTypes) => {
+  const Player = sequelize.define(
+    "Player",
+    {
+      name: DataTypes.STRING,
+      position: DataTypes.STRING,
+      number: DataTypes.INTEGER,
+      age: DataTypes.INTEGER,
+    },
+    { tableName: "players", timestamps: true }
+  );
+
+  Player.associate = (models) => {
+    Player.belongsTo(models.Team, {
+      foreignKey: "team_id",
+      as: "team",
+    });
+  };
+
+  return Player;
+};
+
 
