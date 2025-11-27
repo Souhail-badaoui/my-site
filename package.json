@@ -18,7 +18,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node --watch index.js"
->>>>>>> 1102cad0ce047465d710e480ffa36846fec77cfd:backend/src/routes/package.json
   },
   "keywords": [],
   "author": "",
