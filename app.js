@@ -4,6 +4,7 @@ import playerRoutes from "./src/routes/playerRoutes.js"
 import matchRoutes from "./src/routes/matchRoutes.js"
 
 const app = express();
+
 import "dotenv/config"
 import {sequelize} from "./src/config/database.js"
 // body parser
