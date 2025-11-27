@@ -1,5 +1,7 @@
-import {Player} from '../models/Player.js'
-import { Team  } from '../models/Team.js';
+
+import Player from '../models/Player.js'
+import  Team  from '../models/Team.js';
+
 export const playerController = {
 
   async getAllPlayers(req, res) {

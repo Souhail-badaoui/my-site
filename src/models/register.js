@@ -1,22 +1,18 @@
-dotenv.config();
 import { Sequelize } from "sequelize";
-import dotenv from "dotenv";
 console.log(
-  process.env.DATABASE_NAME,
-  process.env.DATABASE_USER,
-  process.env.DATABASE_PASSWORD,
-  process.env.DATABASE_HOST,
-  process.env.DATABASE_PORT
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASSWORD,
+  process.env.DB_HOST,
 );
 const sequelize = new Sequelize(
-  process.env.DATABASE_NAME,
-  process.env.DATABASE_USER,
-  process.env.DATABASE_PASSWORD,
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASSWORD,
   {
-    host: process.env.DATABASE_HOST,
+    host: process.env.DB_HOST,
     dialect: "postgres",
-    port: process.env.DATABASE_PORT,
-    logging: true,
+    logging: false,
   }
 );
 export default sequelize;
