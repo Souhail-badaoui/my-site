@@ -1,26 +1,13 @@
 import express from "express";
-import { sequelize } from "./config/database.js";
-import  teamRoutes from "./routes/teamRoutes.js";
-import playerRoutes from "./routes/playerRoutes.js"
-import matchRoutes from "./routes/matchRoutes.js"
+import  teamRoutes from "./src/routes/teamRoutes.js";
+import playerRoutes from "./src/routes/playerRoutes.js"
+import matchRoutes from "./src/routes/matchRoutes.js"
 
 const app = express();
 import "dotenv/config"
-import {sequelize} from "./config/database.js"
+import {sequelize} from "./src/config/database.js"
 // body parser
 app.use(express.json());
-
-// ROUTES
-
-/*
-const teamRoutes = require("./routes/teamRoutes");
-const playerRoutes = require("./routes/playerRoutes");
-const matchRoutes = require("./routes/matchRoutes");
-app.use("/teams", teamRoutes);
-app.use("/players", playerRoutes);
-app.use("/matches", matchRoutes);
-*/
-
 
 sequelize.sync({ alter: true });
 
