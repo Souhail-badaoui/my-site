@@ -2,6 +2,7 @@
   "name": "can_2025",
   "version": "1.0.0",
   "description": "",
+<<<<<<< HEAD:package.json
   "type": "module",
   "main": "app.js",
   "scripts": {
@@ -11,6 +12,13 @@
     "migrate": "npx sequelize-cli db:migrate",
     "migrate:undo": "npx sequelize-cli db:migrate:undo",
     "test": "echo \"Error: no test specified\" && exit 1"
+=======
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --watch index.js"
+>>>>>>> 1102cad0ce047465d710e480ffa36846fec77cfd:backend/src/routes/package.json
   },
   "keywords": [],
   "author": "",
